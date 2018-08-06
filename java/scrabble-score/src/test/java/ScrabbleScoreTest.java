@@ -1,4 +1,3 @@
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -71,6 +70,18 @@ public class ScrabbleScoreTest {
     public void testEntireAlphabetAvailable() {
         scrabble = new Scrabble("abcdefghijklmnopqrstuvwxyz");
         assertEquals(87, scrabble.getScore());
+    }
+
+    @Test
+    public void testDoubleWord() {
+      scrabble = new Scrabble("abcdefghijklmnopqrstuvwxyz", Scrabble.WordMultiplier.DOUBLE);
+      assertEquals(174, scrabble.getScore());
+    }
+
+    @Test
+    public void testTripleWord() {
+      scrabble = new Scrabble("abcdefghijklmnopqrstuvwxyz", Scrabble.WordMultiplier.TRIPLE);
+      assertEquals(261, scrabble.getScore());
     }
 
 }

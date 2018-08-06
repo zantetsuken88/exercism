@@ -30,10 +30,31 @@ class Scrabble {
     put('y', 4);
     put('z', 10);
   }};
+
+  public enum WordMultiplier {
+    SINGLE(1),
+    DOUBLE(2),
+    TRIPLE(3);
+
+
+    private final int multiplier;
+
+    WordMultiplier(int multiplier) {
+      this.multiplier = multiplier;
+    }
+  }
+
   private String word;
+  private WordMultiplier multiplier;
 
   Scrabble(String word) {
+    this(word, WordMultiplier.SINGLE);
+  }
+
+  Scrabble(String word, Scrabble.WordMultiplier multiplier) {
     this.word = word;
+
+    this.multiplier = multiplier;
   }
 
   int getScore() {
@@ -45,7 +66,7 @@ class Scrabble {
       score += SCORE_MAP.get(c);
     }
 
-    return score;
+    return score * multiplier.multiplier;
 
   }
 
