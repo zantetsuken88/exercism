@@ -1,5 +1,8 @@
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 public class ScrabbleScoreTest {
@@ -84,4 +87,10 @@ public class ScrabbleScoreTest {
       assertEquals(261, scrabble.getScore());
     }
 
+    @Test
+    public void testDoubleLetters() {
+        List<Scrabble.LetterMultiplier> letterMultipliers = Arrays.asList(Scrabble.LetterMultiplier.SINGLE, Scrabble.LetterMultiplier.DOUBLE, Scrabble.LetterMultiplier.SINGLE, Scrabble.LetterMultiplier.SINGLE, Scrabble.LetterMultiplier.DOUBLE, Scrabble.LetterMultiplier.SINGLE);
+        scrabble = new Scrabble("double", Scrabble.WordMultiplier.DOUBLE, letterMultipliers);
+        assertEquals(261, scrabble.getScore());
+    }
 }

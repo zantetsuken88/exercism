@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.List;
 
 class Scrabble {
 
@@ -44,8 +45,22 @@ class Scrabble {
     }
   }
 
+  public enum LetterMultiplier {
+    SINGLE(1),
+    DOUBLE(2),
+    TRIPLE(3);
+
+
+    private final int letterMultiplier;
+
+    LetterMultiplier(int letterMultiplier) {
+      this.letterMultiplier = letterMultiplier;
+    }
+  }
+
   private String word;
   private WordMultiplier multiplier;
+  private List<LetterMultiplier> letterMultipliers;
 
   Scrabble(String word) {
     this(word, WordMultiplier.SINGLE);
@@ -57,13 +72,22 @@ class Scrabble {
     this.multiplier = multiplier;
   }
 
+  Scrabble(String word, Scrabble.WordMultiplier multiplier, List<LetterMultiplier> letterMultipliers) {
+    this.word = word;
+    this.multiplier = multiplier;
+    this.letterMultipliers = letterMultipliers;
+  }
+
   int getScore() {
     char[] wordChars = word.toLowerCase().toCharArray();
 
     int score = 0;
+    int i = 0;
 
     for (char c : wordChars) {
+
       score += SCORE_MAP.get(c);
+      i++;
     }
 
     return score * multiplier.multiplier;
