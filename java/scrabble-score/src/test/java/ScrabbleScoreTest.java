@@ -1,5 +1,4 @@
 import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,6 +7,9 @@ import static org.junit.Assert.assertEquals;
 public class ScrabbleScoreTest {
 
     private Scrabble scrabble;
+    private Scrabble.LetterMultiplier one = Scrabble.LetterMultiplier.SINGLE;
+    private Scrabble.LetterMultiplier two = Scrabble.LetterMultiplier.DOUBLE;
+    private Scrabble.LetterMultiplier three = Scrabble.LetterMultiplier.TRIPLE;
 
     @Test
     public void testALowerCaseLetter() {
@@ -89,8 +91,15 @@ public class ScrabbleScoreTest {
 
     @Test
     public void testDoubleLetters() {
-        List<Scrabble.LetterMultiplier> letterMultipliers = Arrays.asList(Scrabble.LetterMultiplier.SINGLE, Scrabble.LetterMultiplier.DOUBLE, Scrabble.LetterMultiplier.SINGLE, Scrabble.LetterMultiplier.SINGLE, Scrabble.LetterMultiplier.DOUBLE, Scrabble.LetterMultiplier.SINGLE);
+        List<Scrabble.LetterMultiplier> letterMultipliers = Arrays.asList(one, two, one, one, two, one);
         scrabble = new Scrabble("double", Scrabble.WordMultiplier.DOUBLE, letterMultipliers);
-        assertEquals(261, scrabble.getScore());
+        assertEquals(22, scrabble.getScore());
+    }
+
+    @Test
+    public void testTripleLetters() {
+        List<Scrabble.LetterMultiplier> letterMultipliers = Arrays.asList(one, two, one, one, three, one);
+        scrabble = new Scrabble("triple", Scrabble.WordMultiplier.SINGLE, letterMultipliers);
+        assertEquals(11, scrabble.getScore());
     }
 }
