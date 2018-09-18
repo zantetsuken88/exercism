@@ -7,23 +7,29 @@ class Matrix {
     }
 
     int[] getRow(int rowNumber) {
-        String[] rows = matrixAsString.split("[\\n]+");
-        String selectRow = rows[rowNumber];
-        String[] ints = selectRow.split("\\s");
-        int[] result = new int[ints.length];
-        for ( int i=0; i < ints.length; i++) {
-            result[i]=Integer.valueOf(ints[i]);
-        }
-        return result;
+       return convertToArray(matrixAsString)[rowNumber];
         }
 
     int[] getColumn(int columnNumber) {
-        String[] rows = matrixAsString.split("[\\n]+");
-        int[] result = new int[rows.length];
-        for (int i=0; i < rows.length; i++) {
-            String[] selectRow = rows[i].split("\\s");
-            result[i]= Integer.valueOf(selectRow[columnNumber]);
+      int[] column = new int[convertToArray(matrixAsString).length];
+        for (int i = 0; i < column.length; i++) {
+          column[i] = getRow(i)[columnNumber];
         }
-        return result;
+        return column;
+    }
+
+    private int[][] convertToArray(String matrixAsString) {
+      String[] rows = matrixAsString.split("[\\n]+");
+      int[][] matrixArray = new int[rows.length][];
+
+      for ( int i = 0; i < rows.length; i++) {
+        String[] rowChars = rows[i].split("\\s");
+        int[] row = new int[rowChars.length];
+        for (int c = 0; c < row.length; c++) {
+          row[c] = Integer.valueOf(rowChars[c]);
+        }
+        matrixArray[i] = row;
+      }
+      return matrixArray;
     }
 }
